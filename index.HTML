@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Text Decrapifier</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; background: #1e1e1e; color: #eee; }
+    textarea, pre { width: 100%; height: 200px; margin-top: 10px; background: #2e2e2e; color: #eee; border: none; padding: 10px; font-family: monospace; }
+    button { margin-top: 10px; padding: 10px 20px; background: #444; color: #fff; border: none; cursor: pointer; }
+    button:hover { background: #666; }
+  </style>
+</head>
+<body>
+  <h2>🧹 Paste & Clean Text</h2>
+  <textarea id="input" placeholder="Paste your Outlook/Excel text here..."></textarea>
+  <button onclick="cleanText()">Clean It</button>
+  <pre id="output" placeholder="Cleaned output will appear here..."></pre>
+
+  <script>
+    function cleanText() {
+      let raw = document.getElementById('input').value;
+
+      // Replace non-breaking spaces, zero-width spaces, and other invisible junk
+      let cleaned = raw
+        .replace(/[\u00A0\u200B\u200C\u200D\uFEFF]/g, ' ')  // Replace with regular space
+        .replace(/[^\x20-\x7E\n\r]/g, ''); // Remove non-ASCII except line breaks
+
+      document.getElementById('output').textContent = cleaned;
+    }
+  </script>
+</body>
+</html>
